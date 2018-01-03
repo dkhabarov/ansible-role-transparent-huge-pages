@@ -1,0 +1,11 @@
+---
+
+- name: autostart transparent-huge-pages
+  service:
+    name: transparent-huge-pages
+    enabled: yes
+
+- name: start transparent-huge-pages
+  service:
+    name: transparent-huge-pages
+    state: started

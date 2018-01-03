@@ -1,0 +1,16 @@
+---
+
+- name: install transparent-huge-pages.service
+  template:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/transparent-huge-pages.service"
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - "../../host_templates/{{ inventory_hostname }}/etc/systemd/system/transparent-huge-pages.service.j2"
+    - "templates/etc/systemd/system/transparent-huge-pages.service.j2"
+  when: ansible_service_mgr == 'systemd'
+  notify:
+    - autostart transparent-huge-pages
+    - start transparent-huge-pages
